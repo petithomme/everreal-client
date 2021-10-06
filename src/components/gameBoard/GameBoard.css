@@ -1,0 +1,33 @@
+.Red, .Blue, .Green, .Yellow {
+    width: 3rem;
+    height: 3rem;
+    border: 0.1rem solid #282c34;
+}
+
+.Red {
+    background-color: red;
+}
+
+.Blue {
+    background-color: blue;
+}
+
+.Green {
+    background-color: green;
+}
+
+.Yellow {
+    background-color: yellow;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+}
+
+#container {
+    margin: 1rem auto auto;
+    width: max-content;
+}
+
+
