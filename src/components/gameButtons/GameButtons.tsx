@@ -17,7 +17,7 @@ const GameButtons: React.FC = () => {
         const colorsNumberValue = colorsNumber == null ? 4 : Math.max(Math.min((parseInt(colorsNumber) || 4), 4), 2);
         axios.get(Backend.IP+"startNewGame", {params: { size: boardSizeValue, colorsAmount: colorsNumberValue }})
             .then( (response: AxiosResponse) => {
-                dispatch({type: "UPDATE", payload: response.data['data']});
+                dispatch({type: ActionType.UPDATE, payload: response.data['data']});
                 dispatch({type: ActionType.SET_COMPLETED, payload: false});
             });
     }
@@ -25,7 +25,7 @@ const GameButtons: React.FC = () => {
     function nextAutoStep(): void {
         axios.get(Backend.IP + "autoPlay")
             .then( (response: AxiosResponse) => {
-                dispatch({type: "UPDATE", payload: response.data['data']});
+                dispatch({type: ActionType.UPDATE, payload: response.data['data']});
                 if ( response.data['done']) {
                     alert("You won !");
                     dispatch({type: ActionType.SET_COMPLETED, payload: response.data['done']});
@@ -36,7 +36,7 @@ const GameButtons: React.FC = () => {
     function fullAuto(): void {
         axios.get(Backend.IP + "fullAutoPlay ")
             .then( (response: AxiosResponse) => {
-                dispatch({type: "UPDATE", payload: response.data['data']});
+                dispatch({type: ActionType.UPDATE, payload: response.data['data']});
                 if ( response.data['done']) {
                     alert("You won !");
                     dispatch({type: ActionType.SET_COMPLETED, payload: response.data['done']});
