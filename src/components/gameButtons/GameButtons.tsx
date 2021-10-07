@@ -1,8 +1,10 @@
 import React from "react";
 import "./GameButtons.css";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import axios, {AxiosResponse} from "axios";
 import {Backend} from "../../enums/Backend";
+import {ActionType} from "../../enums/ActionType";
+import {BoardState} from "../../reducers/reducers";
 
 const GameButtons: React.FC = () => {
 
@@ -16,6 +18,7 @@ const GameButtons: React.FC = () => {
         axios.get(Backend.IP+"startNewGame", {params: { size: boardSizeValue, colorsAmount: colorsNumberValue }})
             .then( (response: AxiosResponse) => {
                 dispatch({type: "UPDATE", payload: response.data['data']});
+                dispatch({type: ActionType.SET_COMPLETED, payload: false});
             });
     }
 
@@ -25,6 +28,7 @@ const GameButtons: React.FC = () => {
                 dispatch({type: "UPDATE", payload: response.data['data']});
                 if ( response.data['done']) {
                     alert("You won !");
+                    dispatch({type: ActionType.SET_COMPLETED, payload: response.data['done']});
                 }
             });
     }
@@ -35,15 +39,24 @@ const GameButtons: React.FC = () => {
                 dispatch({type: "UPDATE", payload: response.data['data']});
                 if ( response.data['done']) {
                     alert("You won !");
+                    dispatch({type: ActionType.SET_COMPLETED, payload: response.data['done']});
                 }
             });
     }
 
+    const isFinished: boolean = useSelector<BoardState, BoardState["completed"]>(
+        (state) => !state.completed
+    );
+
     return (
         <div id="gameButtons">
             <button data-testid="newGame" className="gameButton" onClick={startNewGame}> NEW GAME</button>
-            <button data-testid="nextAutoStep" className="gameButton" onClick={nextAutoStep}> NEXT AUTO STEP</button>
-            <button data-testid="fullAuto" className="gameButton" onClick={fullAuto}> FULL AUTO</button>
+            { isFinished &&
+                <button data-testid="nextAutoStep" className="gameButton" onClick={nextAutoStep}> NEXT AUTO STEP</button>
+            }
+            { isFinished &&
+                <button data-testid="fullAuto" className="gameButton" onClick={fullAuto}> FULL AUTO</button>
+            }
         </div>
     );
 }
