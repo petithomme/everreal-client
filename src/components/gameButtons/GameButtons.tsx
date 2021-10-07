@@ -23,6 +23,9 @@ const GameButtons: React.FC = () => {
         axios.get(Backend.IP + "autoPlay")
             .then( (response: AxiosResponse) => {
                 dispatch({type: "UPDATE", payload: response.data['data']});
+                if ( response.data['done']) {
+                    alert("You won !");
+                }
             });
     }
 
@@ -30,6 +33,9 @@ const GameButtons: React.FC = () => {
         axios.get(Backend.IP + "fullAutoPlay ")
             .then( (response: AxiosResponse) => {
                 dispatch({type: "UPDATE", payload: response.data['data']});
+                if ( response.data['done']) {
+                    alert("You won !");
+                }
             });
     }
 

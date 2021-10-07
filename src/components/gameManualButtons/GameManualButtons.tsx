@@ -12,6 +12,9 @@ const GameManualButtons: React.FC = () => {
         axios.get(Backend.IP + "play", {params: { color }})
             .then( (response: AxiosResponse) => {
                 dispatch({type: "UPDATE", payload: response.data['data']});
+                if ( response.data['done']) {
+                    alert("You won !");
+                }
             });
     }
 
