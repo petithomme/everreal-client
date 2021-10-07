@@ -11,8 +11,8 @@ const GameButtons: React.FC = () => {
     function startNewGame(): void {
         const boardSize: string | null = prompt("Enter board size (max 15)", '6');
         const colorsNumber: string | null = prompt("Enter Number of color (max 4)", '4');
-        const boardSizeValue = boardSize == null ? 6 : Math.min((parseInt(boardSize) || 6), 15);
-        const colorsNumberValue = colorsNumber == null ? 4 : Math.min((parseInt(colorsNumber) || 4), 4);
+        const boardSizeValue = boardSize == null ? 6 : Math.max(Math.min((parseInt(boardSize) || 6), 15), 2);
+        const colorsNumberValue = colorsNumber == null ? 4 : Math.max(Math.min((parseInt(colorsNumber) || 4), 4), 2);
         axios.get(Backend.IP+"startNewGame", {params: { size: boardSizeValue, colorsAmount: colorsNumberValue }})
             .then( (response: AxiosResponse) => {
                 dispatch({type: "UPDATE", payload: response.data['data']});

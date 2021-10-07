@@ -13,7 +13,7 @@ const GameBoard: React.FC = () => {
     rows = getAllRows(board);
     const display = showAllRows(rows);
     return (
-        <div id="container" key="container">
+        <div data-testid="container" id="container" key="container">
             { display }
         </div>
     );
