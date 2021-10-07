@@ -21,6 +21,12 @@
     border: 0.15rem solid #282c34;
 }
 
+.colorButton:hover {
+    border-radius: 0.25rem;
+    border: 0.15rem solid #FF0505;
+    cursor: pointer;
+}
+
 #red {
     background-color: red;
 }

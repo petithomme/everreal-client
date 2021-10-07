@@ -6,3 +6,9 @@
     margin-right: 1rem;
     margin-left: 1rem;
 }
+
+.gameButton:hover {
+    border-radius: 0.25rem;
+    border: 0.15rem solid #FF0505;
+    cursor: pointer;
+}

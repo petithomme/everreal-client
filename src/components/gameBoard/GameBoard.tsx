@@ -13,7 +13,7 @@ const GameBoard: React.FC = () => {
     rows = getAllRows(board);
     const display = showAllRows(rows);
     return (
-        <div id="container">
+        <div id="container" key="container">
             { display }
         </div>
     );
@@ -21,8 +21,10 @@ const GameBoard: React.FC = () => {
 
 const showAllRows = (rows: any[]) => {
     const result: any[] = [];
+    let rowId: number = 0;
     rows.forEach( (row:any[]) => {
-        result.push(<div className={"row"}>{row}</div>);
+        result.push(<div key={rowId} className={"row"}>{row}</div>);
+        rowId++;
     });
     return result;
 }
@@ -30,9 +32,11 @@ const showAllRows = (rows: any[]) => {
 const getAllRows = (board: Colors[][] ) => {
     const rows: any[] = [];
     let row: any[] = [];
+    let rowId: number = 0;
     board.forEach( (values: Colors[]) => {
         values.forEach( value => {
-            row.push(<div className={Colors[value]}></div>);
+            row.push(<div key={rowId} className={Colors[value]}></div>);
+            rowId++;
         });
         rows.push(row);
         row = [];

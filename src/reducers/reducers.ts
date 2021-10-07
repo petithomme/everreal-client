@@ -5,15 +5,8 @@ export interface BoardState {
     board: Colors[][];
 }
 
-const initialState = {
-    board: [[1,1,1,1,1,1,1],
-            [1,1,2,1,1,1,1],
-            [1,3,1,0,1,1,1],
-            [1,1,1,0,1,1,1],
-            [1,1,0,1,1,1,1],
-            [1,1,1,1,1,1,1],
-            [1,1,1,1,1,1,1],
-            ],
+const initialState: BoardState = {
+    board: [],
 };
 
 export const boardReducer: any = (state: BoardState = initialState, action: PayloadAction) => {
